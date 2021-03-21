@@ -6,6 +6,8 @@ A java GUI wrapped into an easy-to-use, inheritable class
 2. Add appropriate constructor and methods
 3. Create an instance of the class in main
 
+TestDisplay is an example
+
 ## Available methods:
 - init() - called once on start
 - fixedUpdate() - called at X fps
