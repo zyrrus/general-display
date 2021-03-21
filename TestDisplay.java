@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class TestDisplay extends Display implements Displayable {
 
-    public TestDisplay(String title, int width, int height, int fps) {
-        super(title, width, height, fps);
+    public TestDisplay(int width, int height) {
+        super("Test Display", width, height, 60);
     }
 
     @Override
