@@ -4,6 +4,7 @@ import display.Displayable;
 import java.awt.*;
 
 public class TestDisplay extends Display implements Displayable {
+    private int xPos = 0, yPos = 0;
 
     public TestDisplay(int width, int height) {
         super("Test Display", width, height, 60);
@@ -16,7 +17,8 @@ public class TestDisplay extends Display implements Displayable {
 
     @Override
     public void update() {
-
+        this.xPos = this.mouse.getX();
+        this.yPos = this.mouse.getY();
     }
 
     @Override
@@ -27,6 +29,7 @@ public class TestDisplay extends Display implements Displayable {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.blue);
-        g.drawOval(200, 50, 30, 30);
+        g.drawOval(this.xPos - 15, this.yPos - 15, 30, 30);
     }
 }
+
