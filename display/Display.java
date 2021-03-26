@@ -10,9 +10,21 @@ public class Display extends Canvas implements Runnable, Displayable {
     private static boolean running = false;
     private final int fps;
 
+    // Listeners
+    protected Mouse mouse;
+    protected Keyboard keyboard;
+
+    // Flags
+    protected boolean antialiasingON = true;
+    protected boolean showFPS = true;
+    protected boolean isResizable = false;
+    protected boolean isAlwaysOnTop = true;
+
+    // Settings
+    protected Color bgColor = new Color(22, 22, 22);
     protected String title;
     protected final int WIDTH, HEIGHT;
-    protected Mouse mouse;
+
 
     // System methods
     public Display(String title, int width, int height, int fps) {
@@ -22,23 +34,27 @@ public class Display extends Canvas implements Runnable, Displayable {
         this.title = title;
 
         this.frame = new JFrame();
-
         Dimension size = new Dimension(WIDTH, HEIGHT);
         this.setPreferredSize(size);
 
+        // Add mouse
         this.mouse = new Mouse();
         this.addMouseListener(this.mouse);
         this.addMouseMotionListener(this.mouse);
         this.addMouseWheelListener(this.mouse);
+
+        // Add keyboard
+        this.keyboard = new Keyboard();
+        this.addKeyListener(this.keyboard);
 
         this.frame.setTitle(this.title);
         this.frame.add(this);
         this.frame.pack();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationRelativeTo(null);
-        this.frame.setResizable(false);
+        this.frame.setResizable(this.isResizable);
         this.frame.setVisible(true);
-        this.frame.setAlwaysOnTop(true);
+        this.frame.setAlwaysOnTop(this.isAlwaysOnTop);
 
         this.start();
     }
@@ -48,7 +64,6 @@ public class Display extends Canvas implements Runnable, Displayable {
         this.thread = new Thread(this, "display.Display");
         this.thread.start();
     }
-
     public synchronized void stop() {
         try {
             this.thread.join();
@@ -82,30 +97,12 @@ public class Display extends Canvas implements Runnable, Displayable {
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                this.frame.setTitle(this.title + " | " + frames + " fps");
+                if (this.showFPS) this.setTitle(this.title + " | " + frames + " fps");
                 frames = 0;
             }
         }
         stop();
     }
-
-    // Control methods
-    public void init() {
-        // Called on start
-    }
-
-    public void update() {
-        // Called every frame
-    }
-
-    public void fixedUpdate() {
-        // Called at 60 fps
-    }
-
-    public void draw(Graphics g) {
-        // Draw to canvas
-    }
-
     private void render() {
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
@@ -114,10 +111,10 @@ public class Display extends Canvas implements Runnable, Displayable {
         }
         Graphics g = bs.getDrawGraphics();
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        if (this.antialiasingON) g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Background
-        g.setColor(new Color(22, 22, 22));
+        g.setColor(this.bgColor);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         // Start Rendering
@@ -127,5 +124,13 @@ public class Display extends Canvas implements Runnable, Displayable {
         g.dispose();
         bs.show();
     }
+
+    // Control methods
+    public void init() {}
+    public void update() {}
+    public void fixedUpdate() {}
+    public void draw(Graphics g) {}
+
+    public void setTitle(String s) { this.frame.setTitle(s); }
 }
 

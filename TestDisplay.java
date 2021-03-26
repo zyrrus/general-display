@@ -29,7 +29,6 @@ public class TestDisplay extends Display implements Displayable {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.blue);
-        g.drawOval(this.xPos - 15, this.yPos - 15, 30, 30);
+        g.drawOval(this.xPos-15, this.yPos-15, 30, 30);
     }
 }
-
