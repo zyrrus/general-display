@@ -12,7 +12,6 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
     public int getX() {
         return this.mouseX;
     }
-
     public int getY() {
         return this.mouseY;
     }
@@ -20,11 +19,9 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
     public boolean isScrollingUp() {
         return this.scroll == -1;
     }
-
     public boolean isScrollingDown() {
         return this.scroll == 1;
     }
-
     public void resetScroll() {
         this.scroll = 0;
     }
@@ -47,9 +44,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) { // once
-
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     @Override
     public void mousePressed(MouseEvent e) { // click and hold
@@ -62,14 +57,10 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void mouseExited(MouseEvent e) {}
 
     @Override
     public void mouseDragged(MouseEvent e) {
