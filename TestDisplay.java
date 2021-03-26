@@ -1,5 +1,3 @@
-package projects;
-
 import display.Display;
 import display.Displayable;
 
