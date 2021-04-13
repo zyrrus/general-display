@@ -13,3 +13,9 @@ TestDisplay is an example
 - fixedUpdate() - called at X fps
 - update() - called every frame
 - draw(Graphics g) - called every frame
+
+## Available flags:
+- antialiasingON - enables antialiaing (true by default)
+- showFPS - shows FPS in the window title (true by default)
+- isResizable - enables resizing the window (false by default)
+- isAlwaysOnTop - keep the window on top of all other windows (true by default)
